@@ -4,6 +4,7 @@ import operator
 
 
 # 图像矩阵转换为二进制向量
+# 本例中读取文本文件的前32行和前32列，即32x32的矩阵，转换为1x1024的向量
 def img2vector(filename):
     return_vector = np.zeros((1, 1024))
     fr = open(filename)
@@ -56,9 +57,9 @@ def handwritingTest():
         t_number = int(t_file_string.strip('_')[0])
         t_vector = img2vector('testDigits/%s' % t_file)
         result = knnClassify(t_vector, training, hw_labels, 3)
-        print("分类结果： %d , 实际值： %d" % (result, t_number))
         if result != t_number:
             error_count += 1
+            print("分类结果： %d , 实际值： %d" % (result, t_number))
     print("\n 识别错误的数目：%d" % error_count)
     print("\n 错误率： %f" % (error_count/float(t_number)))
 
